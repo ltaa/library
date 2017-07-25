@@ -61,7 +61,7 @@ export class SearchRequest extends React.Component {
     })
 
     let queryJson = JSON.stringify(queryArray)
-    this.props.dispatch(addToCard(queryJson))
+    this.props.dispatch(addToCard(this.props.workerId, queryJson))
     this.setState({selected: [], addBtnDisabled: true, selectedAll: false})
 
 
@@ -215,7 +215,8 @@ SearchRequest.contextTypes = {
 const mapStateToProps = (state) => {
   return {
     books: state.books,
-    auth: state.auth
+    auth: state.auth,
+    workerId: state.workerId
   }
 }
 

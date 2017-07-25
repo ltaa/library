@@ -39,8 +39,9 @@ export class Checkout extends React.Component {
     if (!this.props.auth)
       this.context.router.history.push('/auth')
 
+    console.log("componentDidMount", this)
 
-    this.props.dispatch(getCardList())
+    this.props.dispatch(getCardList(this.props.workerId))
 	}
 
   componentWillReceiveProps(nextProps) {
@@ -139,7 +140,7 @@ export class Checkout extends React.Component {
     this.setState({selectedAll: selectedAll, selected: selected, checkoutBtnDisabled: checkBtn})
   }
 
-clientHandler(id) {
+clientHandler(clientId) {
 
     console.log("selected values", this.state.selected)
 
@@ -151,7 +152,7 @@ clientHandler(id) {
 
   console.log('query log', queryJson)
 
-  this.props.dispatch(checkout(queryJson, id))
+  this.props.dispatch(checkout(this.props.workerId, clientId, queryJson))
 
   this.setState({selected: [], checkoutBtnDisabled: true, selectedAll: false, openDialog: false})
 
@@ -249,7 +250,8 @@ const mapStateToProps = (state) => {
   console.log("state", state.books)
   return {
     books: state.books,
-    auth: state.auth
+    auth: state.auth,
+    workerId: state.workerId
   }
 }
 

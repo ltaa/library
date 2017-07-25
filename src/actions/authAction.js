@@ -13,8 +13,11 @@ export function getSessionHeader() {
   return {"Authorization": "Bearer " + sessionStorage.getItem("jwt")}
 }
 
-export function loginSuccess() {
-  return {type: LOG_IN_SUCCESS}
+export function loginSuccess(workerId) {
+  return {
+    type: LOG_IN_SUCCESS,
+    workerId: workerId
+  }
 }
 
 export function logoutSuccess() {
@@ -42,7 +45,7 @@ export function getToken(param) {
 
         if (json.status === 200) {
           sessionStorage.setItem("jwt", json.data.jwt)
-          dispatch(loginSuccess())
+          dispatch(loginSuccess(json.data.worker_id))
         } else {
           dispatch(authError(json))
         }
