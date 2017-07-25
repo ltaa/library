@@ -4,10 +4,9 @@ import {getSessionHeader, authError} from './authAction'
 import {datasource} from '../application'
 import {RECEIVE_CARD_BOOKS} from '../constants/constants'
 
-export function addToCard(param) {
-  let id = 1
+export function addToCard(id, param) {
 
-  if (param == null)
+  if (param == null || id == null)
     return
 
   const headers = getSessionHeader();
@@ -31,7 +30,7 @@ export function addToCard(param) {
 
 export function getCardList(id) {
   const headers = getSessionHeader();
-  let requestString = datasource + "/api/card/1"
+  let requestString = datasource + "/api/card/" + id
   const request = new Request(requestString, {
       method: 'GET',
       headers: headers,
@@ -61,14 +60,14 @@ export function getCardList(id) {
   }
 }
 
-export function checkout(param, id) {
+export function checkout(workerId, clientId, param) {
 
-  if (param == null || id == null) {
+  if (param == null || clientId == null || workerId == null) {
     return
   }
 
   const headers = getSessionHeader();
-  let requestString = datasource + "/api/card/1/" + id
+  let requestString = datasource + "/api/card/" + workerId + "/" + clientId
     const request = new Request(requestString, {
       method: 'POST',
       headers: headers,
@@ -78,7 +77,7 @@ export function checkout(param, id) {
   return dispatch => {
     return fetch(request)
       .then(result => {
-        dispatch(getCardList())
+        dispatch(getCardList(workerId))
     })
   }
 }

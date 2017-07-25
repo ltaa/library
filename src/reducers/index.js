@@ -50,6 +50,7 @@ export default function rootReducer(state = initialState, action) {
       })
     case LOG_IN_SUCCESS:
       return Object.assign({}, state, {
+        workerId: action.workerId,
         auth: !!sessionStorage.getItem("jwt"),
       })
     case RECEIVE_BOOKS:

@@ -225,7 +225,8 @@ const mapStateToProps = (state) => {
 
   console.log("update", state.books)
   return {
-    clients: state.clients
+    clients: state.clients,
+		workerId: state.workerId
     // books: state.books,
     // auth: state.auth
   }
