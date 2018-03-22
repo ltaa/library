@@ -7,9 +7,9 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import 'typeface-roboto'
 
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-
-const styleSheet = createStyleSheet('SearchRequest', theme => ({
+const styleSheet = {
   // container: {
   //   display: 'flex',
   //   flexWrap: 'wrap',
@@ -18,9 +18,10 @@ const styleSheet = createStyleSheet('SearchRequest', theme => ({
   //   display: 'flex',
   //   flexWrap: 'wrap',
   // }
-}));
+};
 
-
+// const theme = createMuiTheme({
+// });
 
 export class CreateBook extends React.Component {
 
@@ -160,4 +161,12 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(CreateBook));
+// function CreateBook() {
+//   return (
+//     <MuiThemeProvider theme={theme}>
+//       <MainCreateBook />
+//     </MuiThemeProvider>
+//   );
+// }
+
+export default connect(mapStateToProps,)  (CreateBook);

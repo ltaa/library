@@ -7,13 +7,15 @@ import Grid from 'material-ui/Grid'
 import TextField from 'material-ui/TextField'
 
 import 'typeface-roboto'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('Auth', theme => ({
+
+const styleSheet = {
   auth_field: {
   },
-}));
+};
 
-export class Auth extends React.Component {
+class Auth extends React.Component {
 
   constructor(props) {
     super(props);
@@ -31,6 +33,9 @@ export class Auth extends React.Component {
 
     if (this.state.credentials.login === "" || this.state.credentials.password === "")
       return
+
+    console.log("_onChangeRaiseButton.this")
+    console.log(this)
 
     this.props.dispatch(getToken(this.state.credentials))
   }
@@ -54,16 +59,24 @@ export class Auth extends React.Component {
   render() {
     const classes = this.props.classes;
 
-    return (
-      <div className={classes.auth_field}>
 
-          <Grid container align="center" justify="center" direction="column">
+    console.log("auth.this")
+    console.log(this)
+
+    console.log("auth.this.props")
+    console.log(this.props)
+
+    return (
+      <div className={styleSheet.auth_field}>
+
+          {/* <Grid container align="center" justify="center" direction="column"> */}
+          <Grid container justify="center" direction="column">
             <TextField id="login"
               label="login"
               type="text"
               value={this.state.inputField}
               onChange={this._onChange.bind(this)}
-              marginForm
+              // marginForm
             />
 
             <TextField id="password"
@@ -71,9 +84,10 @@ export class Auth extends React.Component {
               type="text"
               value={this.state.inputField}
               onChange={this._onChange.bind(this)}
-              marginForm
+              // marginForm
             />
-            <Button raised onClick={this._onChangeRaiseButton.bind(this)}>ok</Button>
+            <Button variant="raised" onClick={this._onChangeRaiseButton.bind(this)}>ok</Button>
+            {/* <Button onClick={this._onChangeRaiseButton.bind(this)}>ok</Button> */}
         </Grid>
 
       </div>
@@ -89,4 +103,6 @@ const mapStateToProps = (state) => {
   return {auth: state.auth}
 }
 
-export default connect(mapStateToProps,)(withStyles(styleSheet)(Auth));
+
+export default connect(mapStateToProps,) (Auth);
+// export default connect(mapStateToProps,mapDispatchToProps)(Auth);

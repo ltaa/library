@@ -9,9 +9,9 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import 'typeface-roboto'
 import {fetchClients} from '../actions/clientAction'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-
-const styleSheet = createStyleSheet('SearchRequest', theme => ({
+const styleSheet = {
   // container: {
   //   display: 'flex',
   //   flexWrap: 'wrap',
@@ -20,9 +20,10 @@ const styleSheet = createStyleSheet('SearchRequest', theme => ({
   //   display: 'flex',
   //   flexWrap: 'wrap',
   // }
-}));
+};
 
-
+// const theme = createMuiTheme({
+// });
 
 export class RegisterClient extends React.Component {
 
@@ -162,5 +163,13 @@ const mapStateToProps = (state) => {
   }
 }
 
+// function RegisterClient() {
+//   return (
+//     <MuiThemeProvider theme={theme}>
+//       <MainRegisterClient />
+//     </MuiThemeProvider>
+//   );
+// }
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(RegisterClient));
+
+export default connect(mapStateToProps,)  (RegisterClient);

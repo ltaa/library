@@ -6,10 +6,10 @@ import Grid from 'material-ui/Grid';
 import Divider from 'material-ui/Divider';
 import {logout} from '../actions/authAction';
 import 'typeface-roboto'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
 
-
-const styleSheet = createStyleSheet('App', theme => ({
+const styleSheet = {
   app: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -22,9 +22,9 @@ const styleSheet = createStyleSheet('App', theme => ({
     display: 'flex',
     flexWrap: 'wrap'
   }
-}));
+};
 
-export class App extends React.Component {
+class App extends React.Component {
 
   searchClickHandle(event) {
     console.log("entering searchClickHandle")
@@ -35,7 +35,6 @@ export class App extends React.Component {
 componentWillMount() {
   console.log("Will mount")
 }
-
 
   componentDidMount() {
     console.log("Did mount")
@@ -76,6 +75,7 @@ componentWillMount() {
 
   render() {
     console.log("App render")
+    console.log(this.props)
     const classes = this.props.classes;
     let login_string = ""
 
@@ -88,9 +88,9 @@ componentWillMount() {
 
 
     return (
-      <div className={classes.app}>
+      <div style={styleSheet.app}>
         <Grid item xs={4} sm={2}>
-          <div className={classes.menu_list}>
+          <div style={styleSheet.menu_list}>
           <List>
             <ListItem button onClick={this.homeClickHandle.bind(this)}>
               <ListItemText primary="home"/>
@@ -124,7 +124,7 @@ componentWillMount() {
 
 
         <Grid item xs={8} sm={10}>
-          <div className={classes.app_child}>
+          <div style={styleSheet.app_child}>
 
             {this.props.children}
 
@@ -149,4 +149,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps) (withStyles(styleSheet)(App));
+export default connect(mapStateToProps) (App);

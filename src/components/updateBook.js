@@ -6,9 +6,9 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import 'typeface-roboto'
 
 import Dialog, { DialogActions, DialogContent } from 'material-ui/Dialog';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-
-const styleSheet = createStyleSheet('SearchRequest', theme => ({
+const styleSheet = {
   // container: {
   //   display: 'flex',
   //   flexWrap: 'wrap',
@@ -17,8 +17,10 @@ const styleSheet = createStyleSheet('SearchRequest', theme => ({
   //   display: 'flex',
   //   flexWrap: 'wrap',
   // }
-}));
+};
 
+// const theme = createMuiTheme({
+// });
 
 
 export class UpdateRequest extends React.Component {
@@ -159,4 +161,12 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(UpdateRequest));
+// function UpdateRequest() {
+//   return (
+//     <MuiThemeProvider theme={theme}>
+//       <MainUpdateRequest />
+//     </MuiThemeProvider>
+//   );
+// }
+
+export default connect(mapStateToProps,)  (UpdateRequest);

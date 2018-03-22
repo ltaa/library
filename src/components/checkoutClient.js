@@ -10,8 +10,10 @@ import 'typeface-roboto'
 import {fetchClients, registerClient} from '../actions/clientAction'
 import Dialog, { DialogActions, DialogContent, DialogTitle } from 'material-ui/Dialog';
 import RegisterClient from './registerClient'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('SearchRequest', theme => ({
+
+const styleSheet = {
   // container: {
   //   display: 'flex',
   //   flexWrap: 'wrap',
@@ -20,8 +22,7 @@ const styleSheet = createStyleSheet('SearchRequest', theme => ({
   //   display: 'flex',
   //   flexWrap: 'wrap',
   // }
-}));
-
+};
 
 
 export class CheckoutClient extends React.Component {
@@ -232,5 +233,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(CheckoutClient));
+export default connect(mapStateToProps,)  (CheckoutClient);

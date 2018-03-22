@@ -10,15 +10,19 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Checkbox from 'material-ui/Checkbox';
 import 'typeface-roboto'
 import UpdateRequest from './updateBook'
-import ModeEditIcon from 'material-ui-icons/ModeEdit';
-import Add from 'material-ui-icons/Add';
-import Remove from 'material-ui-icons/Remove'
+import Icon from 'material-ui/Icon';
+// import ModeEditIcon from 'material-ui-icons/ModeEdit';
+// import Add from 'material-ui-icons/Add';
+// import Remove from 'material-ui-icons/Remove'
 import {updateBook} from '../actions/update'
 import {deleteBook} from '../actions/delete'
 import {CreateBook} from './createBook'
 import {createBook} from '../actions/createBook'
 import {cleanBooks} from '../actions/cleanup'
-const styleSheet = createStyleSheet('EditRequest', theme => ({
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+
+
+const styleSheet = {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -27,7 +31,10 @@ const styleSheet = createStyleSheet('EditRequest', theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   }
-}));
+}
+
+// const theme = createMuiTheme({
+// });;
 
 export class EditRequest extends React.Component {
 
@@ -52,7 +59,7 @@ export class EditRequest extends React.Component {
     this.props.dispatch(cleanBooks())
   }
 
-  
+
 	componentDidMount() {
     if (!this.props.auth)
       this.context.router.history.push('/auth')
@@ -250,10 +257,10 @@ _onSelectAll() {
 render() {
   const classes = this.props.classes;
 	return (
-		<div className={classes.container}>
+		<div style={styleSheet.container}>
     <Grid container>
       <Grid item xs={8} sm={8}>
-      <div className={classes.edit_bar}>
+      <div style={styleSheet.edit_bar}>
         <TextField id="placeholder"
           label="Search"
           type="text"
@@ -263,13 +270,17 @@ render() {
           fullWidth={true}
           marginForm
         />
-        <Button raised disabled={this.state.searchBtnDisabled} onClick={this._searchBtnClicked.bind(this)}>search</Button>
-        <Button fab  color="primary"  className={classes.button} onClick={this.createHandler.bind(this)}>
-          <Add />
+        <Button variant="raised" disabled={this.state.searchBtnDisabled} onClick={this._searchBtnClicked.bind(this)}>search</Button>
+        {/* <Button fab  color="primary"  className={classes.button} onClick={this.createHandler.bind(this)}> */}
+        <Button variant="fab"  color="primary" onClick={this.createHandler.bind(this)}>
+          {/* <Add /> */}
         </Button>
-        <Button fab color="primary" disabled={this.state.rmBtnDisabled} onClick={this.deleteHandler.bind(this)}><Remove /></Button>
-        <Button fab color="accent" disabled={this.state.editBtnDisabled} onClick={this._editHandler.bind(this)} className={classes.button}>
-          <ModeEditIcon />
+        <Button variant="fab" color="primary" disabled={this.state.rmBtnDisabled} onClick={this.deleteHandler.bind(this)}>
+          {/* <Remove /> */}
+        </Button>
+        {/* <Button fab color="accent" disabled={this.state.editBtnDisabled} onClick={this._editHandler.bind(this)} className={classes.button}> */}
+        <Button variant="fab" color="default" disabled={this.state.editBtnDisabled} onClick={this._editHandler.bind(this)}>
+          {/* <ModeEditIcon /> */}
         </Button>
 
     </div>
@@ -347,4 +358,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(EditRequest));
+export default connect(mapStateToProps,)  (EditRequest);

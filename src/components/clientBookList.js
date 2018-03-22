@@ -7,13 +7,16 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
 import 'typeface-roboto'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('ClientBookList', theme => ({
+
+const styleSheet ={
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
-}));
+};
+
 
 export class ClientBookList extends React.Component {
 
@@ -143,7 +146,7 @@ export class ClientBookList extends React.Component {
     console.log("ClientBookList render", this)
     const classes = this.props.classes;
     return (
-      <div className={classes.container}>
+      <div style={styleSheet.container}>
         <div className="table__header">
 
           <div>
@@ -215,4 +218,13 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(ClientBookList));
+// function ClientBookList() {
+//   return (
+//     <MuiThemeProvider theme={theme}>
+//       <MainClientBookList />
+//     </MuiThemeProvider>
+//   );
+// }
+
+
+export default connect(mapStateToProps,)  (ClientBookList);

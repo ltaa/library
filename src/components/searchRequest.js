@@ -10,8 +10,9 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Checkbox from 'material-ui/Checkbox';
 import 'typeface-roboto'
 import {cleanBooks} from '../actions/cleanup'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('SearchRequest', theme => ({
+const styleSheet = {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
@@ -20,8 +21,7 @@ const styleSheet = createStyleSheet('SearchRequest', theme => ({
     display: 'flex',
     flexWrap: 'wrap',
   }
-}));
-
+};
 
 
 export class SearchRequest extends React.Component {
@@ -144,10 +144,10 @@ render() {
   const classes = this.props.classes;
 
 	return (
-		<div className={classes.container}>
+		<div style={styleSheet.container}>
     <Grid container>
       <Grid item xs={8} sm={8}>
-      <div className={classes.search_bar}>
+      <div style={styleSheet.search_bar}>
         <TextField id="placeholder"
           label="Search"
           type="text"
@@ -212,6 +212,15 @@ SearchRequest.contextTypes = {
 };
 
 
+// function SearchRequest() {
+//   return (
+//     <MuiThemeProvider theme={theme}>
+//       <MainSearchRequest />
+//     </MuiThemeProvider>
+//   );
+// }
+
+
 const mapStateToProps = (state) => {
   return {
     books: state.books,
@@ -221,4 +230,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(SearchRequest));
+export default connect(mapStateToProps,)  (SearchRequest);

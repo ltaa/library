@@ -9,13 +9,15 @@ import 'typeface-roboto'
 
 import CheckoutClient from './checkoutClient'
 import {cleanBooks} from '../actions/cleanup'
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 
-const styleSheet = createStyleSheet('Checkout', theme => ({
+
+const styleSheet = {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
   },
-}));
+};
 
 
 export class Checkout extends React.Component {
@@ -178,7 +180,7 @@ render() {
 
 
 	return (
-		<div className={classes.container}>
+		<div style={styleSheet.container}>
 			<div className="table__header">
         <Button raised disabled={this.state.checkoutBtnDisabled} onClick={this._onChangeRaiseButton.bind(this)} >checkout</Button>
 				<div>
@@ -255,4 +257,5 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps,)  (withStyles(styleSheet)(Checkout));
+
+export default connect(mapStateToProps,)  (Checkout);
